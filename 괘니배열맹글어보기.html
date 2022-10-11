@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=4152"></script>
+<script>
+    // 이해되었다면 배열 클래스를 맹글어 봄당
+    var MyArray = function(){
+        this.length = 0;           // length 속성 추가, 초기값 0
+        return this; // 생략해도 되지만 명시적 표현
+    }
+    //push 메소드 구현
+
+    MyArray.prototype.push = function(p_val){
+        this[this.length] = p_val;                   // 처음엔 [0] = 값  요따구로 들어가야 함
+        this.length++;  // 1개 넣었으니 length 추가
+    }
+
+    MyArray.prototype.forEach = function(p_cb){
+        for(var i=0; i<this.length; i++){
+            p_cb(i,this[i]);              // 콜백함수 콜
+        }
+    }
+
+    MyArray.prototype.sort = function(p_cb){  // 뻐쁠쩡렬이용
+        if (p_cb == undefined) {  // 매개변수값이 없을 때 그냥 버블 쩡렬
+            for (var i = 0; i < this.length; i++) {
+                for (var j = i + 1; j < this.length; j++) {
+                    if (this[i] < this[j]) {        //자리 바꾸깅
+                        var temp = this[i];
+                        this[i] = this[j];
+                        this[j] = temp;
+                    }
+                }
+            }
+        }
+
+        if(typeof(p_cb) == "function"){  // 함수가 매개변수로 넘어 왔을 때
+            for (var i = 0; i < this.length; i++) {
+                for (var j = i + 1; j < this.length; j++) {
+                    if (p_cb(this[i],this[j]) > 0) {    //자리바꾸기의 핵심
+                        var temp = this[i];
+                        this[i] = this[j];
+                        this[j] = temp;
+                    }
+                }
+            }
+        }
+    }
+    var testArr = new MyArray();   // 객체 생성
+    for(var i=1; i<=10; i++){
+        testArr.push( Math.ceil(Math.random()*100)); // 1~100 사이의 랜덤 숫자
+    }
+    console.log(testArr);  // 원래 값
+    
+    testArr.sort(function(aa,bb){
+        return bb - aa;  // 뒤에 꺼이 앞에 꺼보다 크다면 자리를 바꿔랑 결국 내림차순 
+    })
+    console.log(testArr);
+
+    //testArr.sort();
+    //console.log(testArr); // 정렬된 값( 첫번째 자리만)
+
+    /*
+    testArr.push("로제");
+    testArr.push({name:"재열",point:"잘생김"});
+
+    testArr.forEach(function(p_index,p_value){ 
+        if(p_index == 1){
+            alert(p_index + " : " + p_value.point);            
+        }  
+        alert(p_index + " : " + p_value);
+    });
+    console.log(testArr); // 항상 누느로 화긴 사살
+    */
+</script>

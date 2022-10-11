@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=2365"></script>
+<script>
+    var 함수A = function(매개변수){ 
+        alert(typeof(매개변수));  // function;
+        alert(매개변수);           // function(){code}
+        alert(매개변수("혜림"));         // alert("메롱")
+        alert(매개변수("미정"));         // alert("메롱")
+        alert(매개변수("형주 엄칭 잘 생김 마스크 필요없음"));         // alert("메롱")
+    }
+
+    var 함수B = function(p_arg){
+        return p_arg;
+    }
+
+    //함수A("메롱");  // 문자열 넘기기, 복사방식
+   
+    //함수A(272);     // 숫자 넘기기
+    //함수A(["로제","제니","리사"]); // 배열 넘기기
+    //함수A({name:"미정",status:"아직 미정"}); // JSON 넘기기
+    함수A(함수B);          // 함수 넘기기, 꼬옥 알아야 함, 연습도 해야함
+                          // 콜백을 넘어서 stream형식의 코드로 발전하고 있음
+
+</script>

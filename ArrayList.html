@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    //자바의 ArrayList를 맹글어 봅시당 (결국 js의 배열임당);
+    // 프로젝트가 아주 커지면 네임스페이스를 활용하는 빈도가 커짐
+
+    var YUMI = {};
+    YUMI.get = function(){
+        alert("흥치뿡");
+    }
+
+    var java = {}; // 괘니 name space용
+    java.io = {};  // 괘니 name space용
+
+    ArrayList = function(){
+        this.length = 0;      // 초기 갯수 0
+        return this; // 명시적 표현
+    }
+    ArrayList.prototype.add = function(p_val){
+        this[this.length] = p_val;
+        this.length++;    // 갯수 증가
+        return this;       // 메소드 체인닝!!! 을 위해서 메소드 끝에 요따구로 처리함
+    }
+    //읽기는 보통 메소드 체인닝 기능을 구현하지 않음
+    //리턴되는 데이타타입이 지원하는 메소드나 속성을 자동으로 사용하게 됨
+    ArrayList.prototype.get = function(p_index){  
+        return this[p_index];
+    }
+    ArrayList.prototype.remove = function(p_index){
+        for(var i=p_index; i<this.length-1; i++){
+            this[i] = this[i+1];          // 1개씩 아프로 뗑끼깅
+        }
+        delete this[this.length -1];  // 1개씩 뗑겼으니, 마지막껀 지워버림
+        this.length--;  // 1개 지웠으니 깜소
+        return this;          // 메소드 체인닝을 위한 꺼이
+    }
+
+    java.io.ArrayList = ArrayList;
+
+    var test = new java.io.ArrayList();  // 큰 의미는 없음, 자바인양 사기치깅
+    alert(test.add("혜림").add("재훈").add("건영").remove(1).get(0).indexOf("혜림"));
+    /*
+    test.add("로제");
+    test.add("제니");
+    test.add("리싸");
+
+    test.remove(1);
+    //index 번호가 맘에 안들어용~~ ㅠㅠ  빨랑 해결해 주삼!
+    console.log(test);
+    //alert(test.get(2));
+    */
+
+
+    
+
+</script>

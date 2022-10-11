@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+  //var v_merong = "메롱";  // 전역변수 선언
+  //실제로 전역변수를 선언하는 것이 브라우져 최상위 객체인 window에 속성을 추가하는 것과 같음
+  window.mylover = "블랙핑크 로제";
+  //alert(mylover);
+  //alert(window.mylover);  // 위와 동일
+
+
+ function f_aaa(){   // 전역함수를 선언하는 것은 window객체에 메소드를 추가하는 것과 같음
+    alert("메렁롱");
+ }
+
+ window.f_aaa();
+ //오늘 저녁에 이상한 거 질문합니다. 오프라인 교육의 핵심은 질문
+</script>

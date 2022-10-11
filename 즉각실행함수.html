@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 즉각실행함수 -> 주로 라이브러리에 쓰임
+    //  aaa = 1+ 4 + kkk+ bbb; // 연산 결과가 하나로 귀결되는 것을 표현식이라 부름, 선언문과는 다름
+    // 그럼 언제 쓰냠?
+    // 전체 코드상에서 딱 한번만 실행되어야 하는 코드(메모리 절약)
+    // 중요한 코드(핵심코드)를 블락으로 지어서 표식을 남김 
+
+    /*
+        var aaa = 1+ 3;
+        aaa = aaa * 4;
+        aaa = aaa / 5;
+
+    */
+
+
+    /*
+    (function(p_arg){   // 선언 문법에 어긋남, expression(표현식)으로 되면 OK
+        alert("즉각 실행 함수" + p_arg);
+    })("메롱롱");
+    */
+    !function(p_arg){   // 선언 문법에 어긋남, expression(표현식)으로 되면 OK
+        alert("즉각 실행 함수" + p_arg);
+    }("메롱롱4");
+
+</script>

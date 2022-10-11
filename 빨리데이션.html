@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>validation</title>
+</head>
+<body>
+    <!-- validation을 서버사이드에서만 구현하는 사람들이 있는데
+        기본적으로 클라이언트 사이드에서 구현해야 하고, 부족한 것만 서버사이드에 추가
+    -->
+    <form action="시작.html" onsubmit="return f_submit()">
+        아이디 <input type="text" name="nm_id" id="mid" value=""><br>
+        이메일 <input type="text" name="nm_email" id="memail" value=""><br>
+        암호 <input type="password" name="nm_pw" id="mpw" value=""><br>
+        <input type="submit" value="떤쏭">
+        <!-- submit버튼에 onclick 이벤트를 걸진 않아용 -->
+    </form>
+<script>
+    var v_id = document.querySelector("#mid");
+    function f_submit(){
+        if(!v_id.value){
+            alert("머라도 써 이놈아!");
+            v_id.focus();  // 마우쑤 커서 주깅
+            return false; // 떤쏭 안 할령
+        }
+        return true;  // 떤쏭 할경
+    }
+</script>
+</body>
+</html>

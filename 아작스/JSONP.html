@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // 플리커 Open Api 데이타가 자바스크립트 함수명 호출 방식으로 되어 있어
+        // 미리 불리는 해당함수를 맹글어 둠
+        function jsonFlickrFeed(p_arg){
+            v_disp.innerHTML = "";  // 이전 내용 지우깅, jQuery empty()에 해당
+            var v_items = p_arg.items;
+            for(var i=0; i<v_items.length; i++){
+                    var v_img = document.createElement("img"); // img 태그 맹글기(메모리엥)
+                    v_img.src = v_items[i].media.m;  // 플리커에서 받은 이미지 URL
+                    v_disp.appendChild(v_img); //누네 띠넹 과자 맛나용
+    
+            }
+            //console.log(p_arg);  // 항상 누느로 값을 화긴하는 쓰읍꽌
+        }
+    </script>    
+</head>
+<body>
+    <input type="text" id="schText" value="">
+    <input type="button" value="꺼엄색" onclick="f_imgSch()">
+    <div id="disp"></div>
+<script>
+    var v_schText = document.querySelector("#schText");
+    var v_disp = document.querySelector("#disp");
+    var v_preURL = "https://www.flickr.com/services/feeds/photos_public.gne?tags=";
+    var v_postURL = "&format=json";
+    function f_imgSch(){
+        var v_schURL = v_preURL + v_schText.value + v_postURL;  // 요청 URL 맹글깅
+        var v_script = document.createElement("script");  // script 태그 맹글깅
+        v_script.src = v_schURL;
+        document.head.appendChild(v_script);  // head와 body는 id가 필요없음 (문서에 오직 1개만 존재)
+    }
+</script>    
+<!--요따구로 쓰는 것을 JSONP(JSON PADDING) 이라고 부름
+    요따구로 주면 아주 사용하기가 편한데, 요따구로 주는 사이트는 별로 없음
+    최대 장점은 Cross-Origin! 제약사항이 없음
+-->
+<script src="https://www.flickr.com/services/feeds/photos_public.gne?tags=BTS&format=json"></script>
+</body>
+</html>

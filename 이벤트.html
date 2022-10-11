@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
+    div {
+        border:2px solid pink;
+        color:black;
+    }
+    #hal {
+        width:300px;
+        height:300px;
+    }
+    #mom {
+        position: relative;
+        left:50px;
+        top:50px;
+        width:200px;
+        height:200px;
+    }
+    #na {
+        position: relative;
+        left:50px;
+        top:50px;
+        width:100px;
+        height:100px;
+    }
+</style>
+<body>
+    <div id="hal" onclick="f_hal()"> 할머닝
+        <div id="mom" onclick="f_mom()"> 엄망
+            <div id="na" onclick="f_na()">건영건설</div>
+        </div>
+    </div>
+
+    <a href="#" onclick="f_yumi()">유미짱</a>
+
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=12328"></script>
+<script>
+    function f_yumi(){
+       // event.stopPropagation();
+        event.preventDefault(); // 기본 장착된 기능 막깅, 아주 자주 사용됨
+        alert("유미 안 잔걸로, 제가 잘 못 안 걸롱");
+    }
+
+    //이벤트 버블링(자식의 이벤트가 부모, 부모의 부모 에게 계속 전달 됨)
+    function f_na(){
+        event.stopPropagation();  // 이벤트 전파 막기 (요상태를 이벤트 캡처링이라 부름)
+        alert("나야 나 건영이")
+    }
+    function f_mom(){
+        alert("난 외계인 엄마당");
+    }
+    function f_hal(){
+        alert("할머니 안농");
+    }
+</script>
+</body>

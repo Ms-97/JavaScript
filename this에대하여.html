@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <input type="button" value="누를꼉" id="myBtn">
+</body>
+<script>
+    // in-line 이벤트는 개발중에 많이 사용하고,
+    // 배포전에는 리팩토링을 통해 이벤트 등록법2번이나 3번으로 정리함
+    // on이벤트명 과 addEventListener가 동작이 다른 부분을 정확히 머리에 땅김
+    var v_myBtn = document.querySelector("#myBtn");
+    function f_click(){
+    }
+
+    /*
+    //이벤트 등록법 2번
+    v_myBtn.onclick=function(){
+        v_myBtn.addEventListener("click",function(){
+            alert("지영 지각대장  마니 밉디용");
+        });  
+    }
+    */
+    /*
+    v_myBtn.onclick=function(){
+        alert("성겸이 아주 마니 마니 밉디용");
+    }
+    
+
+    
+    //이벤트 등록법 3번(가장 최신)
+    v_myBtn.addEventListener("click",function(){
+        alert("성겸이 마니 밉디용");
+    });
+    */
+    
+   
+
+
+
+    /*
+    //this가 어렵다고용?
+    function f_check(p_arg1,p_arg2){
+        console.log(this,p_arg1,p_arg2); //? window
+    }
+   //window.f_check();
+
+   var myObj = {name:"로제",company:"YG"};
+
+   f_check.call(myObj,"유미","잤는데 눈이 작데용"); 
+   //apply는 call과 기능이 똑같지만, 단지 매개변수들을 배열에 담아서 한번에 보내야 함
+   f_check.apply(myObj,["유미","잤는데 눈이 작데용"]);
+    */
+   /*
+   var 곽금규 = {name:"금귤",main:"인프라"};
+
+   곽금규.메소드 = f_check;
+   곽금규.메소드();   //? 여기서의 this?
+   // 메소드 앞 객체를 this값이 따라 간다는 걸 알 수 있음.
+   // 하지만 불편하고 애매함. 매번 소스를 누느로 확인해야 해서 너무 피곤
+
+   // 개발자 커뮤니티의 강력한 요구에 call, apply, bind(완던 둥요) 가 출현
+   // this값을 개발자가 강제로 지정
+   */
+</script>

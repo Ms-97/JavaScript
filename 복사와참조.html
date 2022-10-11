@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+//복사(copy)와 참조(reference)는 개발자라면 꼬옥 정확히 구분해야 함
+// 기본형(Primitive type 원시타입이라 불림) 일때 복사
+// 기본형은 속성과 메소드가 없음
+// string, number  boolean // undefined , null.. 
+// 객체형(Object, JSON과 배열) 일때 참조가 이루어짐 // 객체는 무거움
+
+var psh = "박수현짱";
+alert(psh.substring(0,3));  
+// 메소드를 붙이는 순간 자동으로 Wrapper 객체 String으로 바뀜 
+
+/*
+var 김유미정보 = {name:"유미짱",age:100};
+
+var 메롱 = 김유미정보;   //  주소만 전달됨(포인터)
+메롱.name ="남친있떠용"; 
+
+alert(김유미정보.name); //? 레퍼런스
+alert(메롱.name);
+*/
+/*
+var aaa = "흥칫뿡";
+var bbb = aaa;    // 여기서 복사가 이루어짐
+
+bbb = "이상권 만만셍";
+alert(aaa);//?  흥칫뿡 (복사되었기 때문에 영향이 없음);
+*/
+</script>

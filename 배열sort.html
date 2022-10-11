@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=4010"></script>
+<script>
+    /*
+    var str1 = "100" / 1;  // string
+    alert(typeof(str1)); 
+    var str2 = 200;    // number
+    alert(str1 + str2);  //? 100200  문자열 더하기가 우선
+    alert(str2 - str1);  //? 100 ,  -는 문자열 연산이 없고 산술연산만 있어서 숫자로 자동형변환
+    */
+    //자바스크립트 배열에서 중요한 메소드
+    // sort, splices
+    /*
+    var testArr = ["미정","태훈","형주","재혁"];
+    console.log(testArr);
+
+    alert(parseInt("미정"));
+
+    testArr.sort(function(a,b){
+        console.log(a," ",b);
+        // 문자열인 경우
+        if(a < b){
+            return 1;
+        }
+        return -1;
+    });
+    console.log(testArr);
+    */
+
+   // 무거워진 분위기 반전 테스트 문제
+   var testArr2 = [
+         {name:"로제",age:26,song:"Gone"},
+         {name:"제니",age:27,song:"Sole"},
+         {name:"리사",age:26,song:"I Don't Know"},
+         {name:"수빈",age:23,song:"ShutDown"},
+   ];
+
+   console.log(testArr2);
+
+    // testArr2를 age를 기준으로 정렬하시옹 ? 3분 + 쉬는 시간 못 쉬깅
+    testArr2.sort(function(a,b){
+        return b.age - a.age;       // a,b 는 배열요소(여기선 json객체)
+    })
+
+    console.log(testArr2);
+
+    //name 순으로 정렬하려면
+    testArr2.sort(function(p_a,p_b){
+        if(p_a.name < p_b.name){
+            return 1;
+        }
+        return -1;
+    });
+
+    console.log(testArr2);
+
+
+
+</script>

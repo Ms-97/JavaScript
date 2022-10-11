@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<input type="button" value="누를깡" id="jrBtn">
+<script>
+    var v_jrBtn = document.querySelector("#jrBtn");
+
+    function f_check(p_arg){
+        console.log(this);  // 괜히 this값 확인
+        alert("너머온 매개뼌쑤갑쓴" + p_arg);
+    }
+
+    //bind는 내부적으로 해당함수를 복사해서 맹글어서 해당 함수포인터를 리턴해 줌
+    // call, apply 중에 1개 하고 bind 꼭 기억하고, 차이도 알아 둘 것
+    v_jrBtn.addEventListener("click",f_check.bind({"name":"동석사랑"},"메롱"));
+</script>
