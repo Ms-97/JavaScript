@@ -6,9 +6,21 @@
     <div class="merong">김민수</div>
     <div>조정현</div>
     <div class="merong">윤재열</div>
+    <input type="text" style="color:blue;background-color: yellow;" name="nm_txt" id="id_txt1" value="성겸김">
+    <input type="text" style="color:yellow;background-color: black;" name="nm_txt" id="id_txt2" value="민혁기">
+    <input type="text" style="color:black;background-color: pink;" name="nm_txt" id="id_txt3" value="동석곽">
 </body>
-<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=1397"></script>
 <script>
+    //jQuery는 사방에 for문이 널려있음, 전기를 잘 빨아먹음, 모바일에 사용시 주의
+
+
+    // [] 배열식 접근법  요즘은 모르면 좌절! 
+    //var attr = "name";
+    //alert(document.querySelector("#id_txt")[attr]); //?
+
+    var v_txt = document.querySelector("#id_txt");
+    //$(v_txt).html()
+
     var aa = !0;  // 요따구로 true를 표현 4자 -> 2자로 용량 줄이기,  uglyfy(못생기게 하다)
 //json과 callback이 이해된다면 jQuery($)를 간단하게 맹글어 볼 수 있어용
 //즉각실행함수
@@ -18,6 +30,7 @@
     }
 
     var Hr=function(p_selector){
+        this.prev = p_selector;   // 넘어온 선택자를 저장해둠(선택자만)
         var elems = document.querySelectorAll(p_selector);
         //선택된 것들을 생성되는 객체의 속성으로 옮겨담기, 그래야 가지고 다니니깡
         this.length = elems.length; 
@@ -34,10 +47,147 @@
 
 //jQuery에서 요렇게 메소드를 추가하는 것을 Plugin을 개발한다라고 과장해서 부름
 $.fn.eq = function(p_index){
-    return this[p_index];
+    this[0] = this[p_index]; //선택된 걸 0번으로 옮기고 
+
+    for(var i=1; i<this.length; i++){  // 나머진 지워버림
+        delete this[i];
+    }
+    this.length = 1;          //선택된 게 1개밖에 없으니 강제로 1
+    return this;              //메소드 체인닝
 }
 
+
+$.fn.end = function(){
+    //최초 선택자로 돌아가는 메소드
+    return $(this.prev);  // 새로 생성해서 리턴해줌
+}
+
+
+$.fn.on = function(p_eventName,p_cb){
+    for(var i=0; i<this.length; i++){
+        this[i].addEventListener(p_eventName,p_cb);
+    }
+    return this;  // 메소드 체인닝
+}
+
+//직접 한번 만들어 보면 좋은 게 2개
+//value 속성을 제어하는 val() 메소드
+// 누느로 확인한 뒤에는 꼭 손에도 알려줘야 함
+// 지금 잘 해 놓으면 프로젝트에 가속이 붙어 서 빨리 빨리 잘되용
+$.fn.val = function(p_arg){
+    if(!p_arg){              // 매개변수 없을 때
+        return this[0].value ;
+    }
+
+    if(typeof(p_arg) == "string"){
+        for(var i=0; i<this.length; i++){
+            this[i].value = p_arg;
+        }
+        return this;
+    }
+
+    if(typeof(p_arg) == "function"){
+        for(var i=0; i<this.length; i++){
+            this[i].value = p_arg.call(this[i],i,this[i].value)
+        }
+        return this;
+    }
+}
+
+$.fn.css = function(p_name,p_opt){
+    if(typeof(p_name) == "string" &&  !p_opt){              // 매개변수 없을 때
+        return this[0].style[p_name] ;
+    }
+
+    if(typeof(p_arg) == "string" && typeof(p_opt) == "string"){
+        for(var i=0; i<this.length; i++){
+            this[i].style[p_name] = p_opt;
+        }
+        return this;
+    }
+
+    if(typeof(p_arg) == "string" && typeof(p_opt) == "function"){
+        for(var i=0; i<this.length; i++){
+            this[i].style[p_name] = p_opt.call(this[i],i,this[i].style[p_name])
+        }
+        return this;
+    }
+}
+
+
+alert($("input").css("color"));
+
+
+alert($("input").val());
+$("input").val("그냥 전체 쓰깅");
+$("input").val(function(p_index,p_oldValue){
+    if(p_index == 2){
+        return "그냥 바꾸려고용";
+    }
+    return p_oldValue; // 원래 값 유지용(조건에 해당되지 않을 때)
+});
+
+
+/*
+//css(style)를 제어하는 css() 메소드
+$.fn.css = function(p_cssName,p_opt){
+
+}
+
+
+$("div").on("click",function(){
+    alert(this.innerHTML);
+})
+
+$.fn.attr = function(p_attr,p_opt){
+    //읽기
+    if(typeof(p_attr)=="string" && typeof(p_opt)=="undefined"){
+        return this[0][p_attr];//? 옳슴미깡?
+    }
+
+    //전부 쓰기
+    if(typeof(p_attr)=="string" && typeof(p_opt)=="string"){
+        for(var i=0; i<this.length; i++){
+            this[i][p_attr] = p_opt;
+        }
+        return this;   //  메소드 체인닝!
+    }
+
+    if(typeof(p_attr)=="string" && typeof(p_opt)=="function")  {
+        for(var i=0; i<this.length; i++){
+            this[i][p_attr] = p_opt.call(this[i],i,this[i][p_attr]);
+        }
+        return this;   //  메소드 체인닝!
+    }
+}
+//전부쓰깅
+//$("input").attr("type","checkbox");
+
+$("input").attr("type",function(p_index,p_val){
+    if(p_index == 1){
+        return "checkbox";
+    }
+    return p_val;   // 원래대롱
+})
+
+*/
+
+/*
+var merong = $("input"); 
+// jQuery사용시 2번이상 사용되는 jQuery객체(요소를 가지는 컨테이너)는 변수로 받는다
+// 요즘은 javascript와 jQuery(브라우져 호환성부분)를 섞어서 씀 -> 
+// Dom Element(요소)를 $()를 묶어주면 바로 jQuery객체로 사용할 수 있음.
+
+// jQuery는 사양길에 접어 들었음. 프론트 프레임워크(vanila, vue, react, angular)
+
+alert(merong.attr("type"));
+alert(merong.attr("id"));
+alert(merong.attr("value"));
+alert(merong.attr("name"));
+*/
+
 // 읽기, 전부쓰기, 일부쓰기 (보통 요따위 패턴으로 구성)
+
 $.fn.html = function(p_arg){  // innerHTML 속성을 편하게 다루는 메소드
     if(!p_arg){  // 매개변수가 값이 넘어오지 않았을 때
         return this[0].innerHTML;   // 읽기는 무조건 첫번째 요소(element)의 값
@@ -53,19 +203,31 @@ $.fn.html = function(p_arg){  // innerHTML 속성을 편하게 다루는 메소�
     //jQuery의 콜백부분은 거의 대부분 요따구로 되어 있음(Good Idea but Performance problem)
     if(typeof(p_arg) == "function"){
         for(var i=0; i<this.length; i++){
-           this[i].innerHTML = p_arg(i,this[i].innerHTML); // 인덱스와 원래가지고 있는 innerHTML을 넘김
+           this[i].innerHTML = p_arg.call(this[i],i,this[i].innerHTML); // 인덱스와 원래가지고 있는 innerHTML을 넘김
         }
+        return this;   // 메소드 체인닝을 위함
     }
-
 
 }
 
+/*
 $("div").html(function(p_index,p_html){
+    //console.log("elem",this);   // 아두 뚱요!
     if(p_index == 0){
+        this.style.fontSize="1em";  //  글자크기를 5배롱
         return "어쩌구 저쩌궁 심재린";
     }
+    return p_html;  // 원래 꺼 그대로 리턴
     //alert(p_index + " : " + p_html); // 누느로 화긴
+}).html(function(p_index,p_html){
+    if(this.innerHTML == "조정현"){
+        return "<h1>" + p_html + "</h1>";
+    }
+    return p_html;  
 })
+
+$("div").eq(1).html("<h1>민수짱</h1>").end().eq(0).html("<h1>메롱</h1>");
+*/
 
 //요기서 jQuery 필수 메소드를 html,attr,val
 //alert($("div").html());
