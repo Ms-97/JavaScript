@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <input type="button" value="눌러줘잉" id="id_btn">
+</body>
+<script>
+//화살표함수에는 this에 대한 제약사항이 있음
+//굳이 this에 대한 제약사항을 외우지 말고, this가 필요하면 function키워드를 사용
+const c_btn = document.querySelector("#id_btn");
+
+c_btn.addEventListener("click",function(){
+    console.log("func:",this);
+});
+
+c_btn.addEventListener("click",()=>{
+    console.log("arrow:",this);
+});
+
+/*    
+//spread operator ...
+function f_manyArg(...merong){
+    console.log(merong); // 누느로 화긴;
+}  
+f_manyArg("로","제","니","사","미","정","혜","림"); 
+
+let aa = ["a","b","c"];
+let bb = ["d","e","f"];
+let cc = [...aa,...bb];   // 배열 합치깅
+console.log(cc);  // 누느로 화긴
+*/
+
+/*
+//구조 분해, 일부 의견이 분분, 꽤 써보면 괜찮다 쓸만하다
+let test = {a:7,b:8};
+let {a,b} = test;
+alert(a);  // 7
+alert(b);
+*/
+
+//arrow function 화살표 함수  이건 대세라 어쩔 수 없이 많이 씀
+//화살표 함수에는 this에 대한 제약사항이 있음(요것도 의견이 나뉨)
+
+
+
+
+//var roze = function(){
+//     console.log("체킁");
+//}
+
+// 매개변수가 1개면 ()을 생략할 수 있음
+// return문 1개만 있으면 return과 {}도 생략 가능 (외국애들이 엄칭 좋아함)
+var roze = p_arg => p_arg;
+
+/*
+var roze = (p_arg) => {
+    return p_arg
+}
+*/
+
+//alert(roze("메롱"));
+
+var f_check = function(p_arg){
+    return function(p_arg){
+        return function(p_arg){
+            return p_arg;
+        }
+    }
+}
+//억지 문제 위 함수를 화살표 함수로 바꾸어 보삼
+// 아래처럼 넘 심하게 하면 화딱지가 남  때려줘야 함
+//var f_check = p_arg => p_arg =>p_arg => p_arg
+</script>

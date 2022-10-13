@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <div id="disp" style="border:3px solid black"></div>
+</body>
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=6506"></script>
+<script>
+//Promise(ES6이상에서 가장 중요 필수중의 필수!)
+//비동기를 처리할 때 -> 보통은 종료 이벤트에 콜백함수를 이용해서 처리했는데
+//비동기속에 비동기속에 비동기식으로 프로그램 해야 하는 경우 
+//콜백함수속에 콜백함수속에 콜백함수 식으로  코드가 구성되어 가독성이 현저히 떨어지는 문제가 발생
+//개발자들이 이를 콜백지옥(Hell Of Callback)이라 부르면서 강력하게 개선을 요구
+// Blue-bird에서 사용하던 것을 수입
+// 처음에 많이 낯선데 , 다행인 건 개발자는 Promise를 만들 일 보다는 사용할 일이 더 많아서
+// 사용만 잘해도 큰 문제는 없음
+
+// Promise가 나와서 처음에 잠깐 개발자들이 오우 괜찮다! 고 하다가 역시 비동기가 많아지고
+// 코드이 가독성이 떨어지는 건 마찬가지다 라는 인식이 팽배
+
+// 최종적으로 async ,await 키워드가 등장 (칭찬을 한 몸에 받음. 베리 굳 아이디어!)
+
+
+//나의 첫번째 Promise
+
+const c_disp = document.querySelector("#disp");
+
+const axios = {};  // axios라는 유명한 비동기 라이브러리가 있음(namespace용)
+//메소드 get 추가
+axios.get =(p_url) => {
+    return new Promise((resolve,reject)=>{
+        //resolve("약속이 잘 실행되었어용");
+        //reject("이건 다 성겸이 때문이얌");
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("get",p_url,true);
+        xhr.onreadystatechange = ()=>{
+            if(xhr.readyState == 4 && xhr.status == 200){
+                resolve(xhr.responseText);  // 일이 잘 끝났으니 resolve를 이용해서 알려줌 
+            }
+        }
+        xhr.send();
+    })
+}
+
+axios.get("../아작스/data.csv").then((sleepysubin)=>{
+    c_disp.innerHTML += sleepysubin;
+})
+
+axios.get("../아작스/data.json").then((sleepysubin)=>{
+    c_disp.innerHTML += sleepysubin;
+})
+
+axios.get("../아작스/data.html").then((sleepysubin)=>{
+    c_disp.innerHTML += sleepysubin;
+})
+
+/*
+firstPromise()
+       .then((rslt)=>{
+          console.log("너머온 갑쓴",rslt);
+       })
+       .catch((error)=>{
+          console.log("약속이 파탄난 이유",error)
+       })
+       .finally(()=>{
+         console.log("약속이 어떻게 되든 난 그냥 할쳐");
+       })
+*/
+</script>

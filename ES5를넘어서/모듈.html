@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script type="module">
+    // Module (원래 node.js에서 쓰던 건데 브라우져에서도 지원)
+    // 크게 2가지  common js module, esm(ecma script module)
+    // import가 아니고 require를 쓰는 경우가 common js module방식
+    import { AA } from "./roze.js";
+    console.log(AA);
+    // window.merong = AA;  요건 다시 확인?
+    AA();
+    //모듈을 쓰는 이유에 집중, type=moudle밖을 벗어나지 못함(집중이 가능)
+    // isolation(분리)
+</script>
+<script>
+   // AA(); //?
+</script>

