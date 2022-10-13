@@ -1,12 +1,18 @@
-
 <!DOCTYPE html>
-<meta charset="UTF-8">
-<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=10271"></script>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <meta charset="UTF-8">  <!-- 항상 빼먹지 말길-->
+</head>
 <script>
     //localstorage는 브라우져의 저장소로(영구저장소), 용량이 작은 데이타를 저장할 때 유용
     //크롬 기준 사이트별 5M (텍스트 저장공간으로는 그렇제 작지 않음)
     //쿠키 대신 쓰면 아주 좋음
     // 단점은 문자열밖에 저장이 안됨 (편법 테그닉이 필요);
+
+    // PWA Progressive Web Aplication(hybird app) native + web
+    // SPA Single Page Application => Ajax + Restful Api 방식(시대적 요구사항)
+    // 검색엔진에 많은 페이지가 노출 되어야 하는 사이틑느 별도 전략 필요
 
     localStorage.setItem("merong",JSON.stringify({name:"한태훈",age:200})); //?
 
@@ -23,3 +29,4 @@
     localStorage.clear();  // 싸악 지우깅
     */
 </script>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <meta charset="UTF-8">  <!-- 항상 빼먹지 말길-->
+<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=8744"></script>
+</head>
+<body>
+    <div id="disp" style="border:2px solid black"></div>
+
+    아이딩 <input type="text" id="ls_id" value=""><br>
+    이름 <input type="text"   id="ls_name" value=""><br>
+    나이 <input type="text"   id="ls_age" value=""><br>
+    주소 <input type="text"   id="ls_addr" value=""><br>
+    <input type="button" value="쑤정"  id="upBtn">
+<script>
+//쑤정 버튼이 동작하도록 해봅니당. (제한시간 5~10분);  // 쭝요 
+
+var v_tblName = "myTable";  // 키값으로 사용할 것임
+var v_disp = document.querySelector("#disp");
+
+//리스트 뿌리깅
+var v_datas = JSON.parse(localStorage.getItem(v_tblName));
+var v_tblStr = "<table border=2 style='width:100%'>";
+v_tblStr += "<tr><th>ID</th><th>이름</th><th>나이</th><th>주소</th></tr>";
+for(var i=0; i< v_datas.length; i++){
+    v_tblStr += "<tr>";
+    v_tblStr += "<td>" + v_datas[i].id + "</td>";
+    v_tblStr += "<td>" + v_datas[i].name + "</td>";
+    v_tblStr += "<td>" + v_datas[i].age + "</td>";
+    v_tblStr += "<td>" + v_datas[i].address + "</td>";
+    v_tblStr += "</tr>";    
+}
+v_tblStr += "</table>";
+v_disp.innerHTML = v_tblStr;  // 완성된 html 문자열  disp안에 넣깅
+
+
+var v_id = document.querySelector("#ls_id");
+var v_name = document.querySelector("#ls_name");
+var v_age = document.querySelector("#ls_age");
+var v_addr = document.querySelector("#ls_addr");
+var v_upBtn = document.querySelector("#upBtn");
+
+v_upBtn.onclick = ()=>{
+    var v_datas = JSON.parse(localStorage.getItem(v_tblName)); // 읽어온건 문자열(형식은배열)
+    for(var i=0; i<v_datas.length; i++){
+       // console.log(v_datas[i].id);  // 디버깅
+        if(v_datas[i].id == v_id.value){    // 아이디 값으로 껌쌕해서 같다면
+            console.log(v_name.value,v_age.value, v_addr.value ); // 받은 값
+            console.log(v_datas[i].name,v_datas[i].age, v_datas[i].address ); // 읽은 값
+
+            v_datas[i].name = v_name.value;  // 더퍼쓰깅
+            v_datas[i].age = v_age.value;    // 더퍼쓰깅
+            v_datas[i].address = v_addr.value;  // 더퍼쓰깅
+            break;                     // id 값은 유일하므로 더 돌 이유가 없음
+        }
+
+    }
+        // 배열 내용을 수정했지만, 배열은 메모리상의 데이타고 
+        // localStorage는 하드디스크에 저장된 데이타 이므로
+        // localStorage 데이타를 바꾸려면, 메모리상의 배열 데이타로 localStorage를 더퍼써야 함
+        // localStorage를 잘 쓰는 데는 요부분을 확실히 이해하는 것이 뽀인토!!!
+
+    localStorage.setItem(v_tblName, JSON.stringify(v_datas));
+}
+
+
+//localStorage를 객체지향(NoSql) DB처럼 사용하기
+var isFirst = !1;  // 요런 걸 스위치라고 부름
+if(isFirst){
+    var v_dumArr = [];
+    var v_city = ["써울","때전","뿌산","때구","꽝주"];
+    for(var i=0; i<108; i++){
+        var v_member = {};   // 회원정보 객체 (스프링에 비유하면 VO)
+        v_member.id = (i+1);             // 데이타세트를 구성할 땐 primary key로 쓸게 필요(껌색짱)
+        v_member.name = "홍길똥" + i;
+        v_member.age = Math.ceil(Math.random()*80)+20;   // 20~100쌀
+        if(i==100){
+            v_member.address = ["로제","제니","리사",{name:"껀영껀썰"}];
+        }else {
+            v_member.address = v_city[ Math.floor(Math.random() * v_city.length) ];
+        }
+        v_dumArr.push(v_member);  // 만든 객체를 배열에 담깅 
+    }
+
+    //localStorage는 문자열밖에 저장이 안된다는 제약사항이 있음을 잊지말길
+    localStorage.setItem(v_tblName, JSON.stringify(v_dumArr));  
+
+    //더미 데이타 맹글어 넣깅
+
+}
+</script>    
+</body>
+</html>

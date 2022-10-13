@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>Document</title>
+
+</head>
+<body>
+<div>
+<table style="width:100%" border=""2>
+    <tbody id="tbody">
+        <tr><th>ID</th><th>이름</th><th>나이</th><th>주소</th></tr>
+    </tbody>
+</table>
+</div>  
+<script>
+setTimeout(()=>{
+    window.scrollTo(0,0); 
+},100);
+var v_tbody = document.querySelector("#tbody");
+var v_cntPerOne = 30;     // 1번에 가져올 데이타 갯수
+var v_cnt = 1;            // 몇번째?
+
+var v_datas = JSON.parse(localStorage.getItem("myTable"));
+var f_init = ()=>{
+    var v_end = v_cnt*v_cntPerOne;  // 끝 번호 괜히 한번 계산식으로 
+    var v_str ="";
+     for(var i=0; i<v_end; i++){
+        v_str += "<tr>";
+        v_str += "<td>" + v_datas[i].id + "</td>";    
+        v_str += "<td>" + v_datas[i].name + "</td>";    
+        v_str += "<td>" + v_datas[i].age + "</td>";    
+        v_str += "<td>" + v_datas[i].address + "</td>";    
+        v_str += "</tr>";
+     }
+     v_tbody.innerHTML += v_str;
+}
+f_init();  // 최초 그냥 30개 디스플레이
+
+
+
+
+var v_tunningVal = 50;  
+window.onscroll = ()=>{
+    var v_top = parseInt(document.documentElement.scrollTop);// 스크립트로 소수점 연산은 좋지 않음
+    var v_clientHeight = document.documentElement.clientHeight;
+    var v_docHeight =document.documentElement.scrollHeight;
+    if( (v_top + v_clientHeight) >= (v_docHeight-v_tunningVal)){
+
+        
+    }
+}
+</script>
+</body>
+</html>

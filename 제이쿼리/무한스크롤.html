@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>Document</title>
+</head>
+<body>
+<!-- 무한스크롤은 원래 모바일에서 주로 활용되었고, 모바일에 적정한 방법인데 
+요드믄 일부에서 데스크탑 웹앱에서 사용!  
+일단 스크롤이 생길 정도의 데이타가 필요    
+-->
+<div id="disp">
+<script>
+for(var i=1; i<=10; i++){
+    document.write("<h2>미정이는 부부개발자 "+ i + "원해용</h2>");
+}
+</script>
+</div>  
+<script>
+//꾸글의 답변대로 미세한 시간차를 발생시킴
+setTimeout(()=>{
+    window.scrollTo(0,0); // 스크롤바로 맨 위로 옮기깅
+},100);
+//구글의 답변은 이거슨 버그가 아니공, 자신들 스크립트엔진이 너무 좋아서 발생한당
+//시간을 쪼메만 주면 된다는 현학적 답변을 받았음
+
+//윈도우 스크롤 이벤토
+var v_tunningVal = 50;  // 바닥보다 조금 위의 값으로 튜닝
+window.onscroll = ()=>{
+    var v_top = parseInt(document.documentElement.scrollTop);// 스크립트로 소수점 연산은 좋지 않음
+    var v_clientHeight = document.documentElement.clientHeight;
+    var v_docHeight =document.documentElement.scrollHeight;
+    //스크롤이 끝에 다다르면 
+    if( (v_top + v_clientHeight) >= (v_docHeight-v_tunningVal)){
+        //alert("스크롤 다 와떠용");  // 누느로 화긴
+        //요기서 데이타를 추강, 억지로 추강
+       // 보통은 요자리에 Ajax가 들어와서 서버쪽에서 데이타를 가져옴
+
+        var v_str = "";
+        for(var i=1; i<=10; i++){
+            v_str += "<h1>추가 되용 혜림" + Math.ceil(Math.random()*100) +"</h1>";
+        }
+        document.querySelector("#disp").innerHTML += v_str;
+        
+    }
+}
+</script>
+</body>
+</html>
