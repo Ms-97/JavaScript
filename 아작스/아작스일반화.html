@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <script>
     //아작스일반화(리팩토링) -> jQuery Ajax로 탄생
-    //자바스크립트에는 패키지개념이 없음(보통 이런걸 name space라고 함)
+    //자바스크립트에는 패키지개념이 없음(보통 이런 걸 name space라고 함)
     //name space를 객체(json)을 이용해서 표현
 
-    var $ = {}; // 빈객체 생성
-
+    var $ ={};  // 빈객체 생성
     $.ajax = function(p_set){     // 만약 p_set가 json으로 넘어 온다면
         //매번 써야 되는 반복되는 코드
         var xhr = new XMLHttpRequest();
         xhr.open(p_set.method, p_set.url,true);
-        xhr.onreadystatechange =function(){
+        xhr.onreadystatechange = function(){
              if(xhr.readyState == 4 && xhr.status == 200){
                 if(p_set.dataType == "json"){
-                    p_set.sucess(Json.parse(xhr.responseText)) // 넘겨 받은 데이터 어케처리?
-                }else{
+                    p_set.success(JSON.parse(xhr.responseText)) // 넘겨 받은 데이타 어케 처리?
+                }else {
                     p_set.success(xhr.responseText) // 넘겨 받은 데이타 어케 처리?
                 }
              }
@@ -36,7 +34,7 @@
     $.ajax({
         method:"get",
         url:"data.json",
-        dataType:"text",
+        dataType:"json",
         success:function(p_result){
             console.log(p_result);
         }

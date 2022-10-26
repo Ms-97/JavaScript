@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/raw"></script>
+<style>
+    #merong {
+        width:100%;
+        height:50vh;
+        border:1px solid pink;
+    }
+</style>
+</head>
+<body>
+    <div id="merong"></div>
+    <script>
+        const editor = new EditorJS({
+            holder: 'merong',
+            tools: {
+                header: Header,
+                raw: RawTool,
+            },
+        });
+    </script>
+</body>
+</html>

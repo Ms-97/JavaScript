@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt" value="">
+    <input type="button" value="누르숑" id="btn">
+    <iframe id="ifr" src="시작.html" scrolling="no" frameborder="2" style="width:100%"  ></iframe>
+    <div><h1>수현이 잔데용</h1></div>
+<script>
+    const ctxt= document.querySelector("#txt");
+    const cbtn = document.querySelector("#btn");
+    const cifr = document.querySelector("#ifr");
+    cifr.onload = ()=> {
+            console.log(cifr.contentDocument.documentElement.scrollHeight);
+            let tunnHeight = 50; // 튜닝값
+            let docHeight = cifr.contentDocument.documentElement.scrollHeight;
+            //강제 사이즈 조정
+            cifr.height = docHeight + tunnHeight;
+    }           
+
+    cbtn.onclick = ()=>{
+        let idoc = cifr.contentDocument;
+        console.log("현재노피:",idoc.documentElement.scrollHeight)
+        let lstr = "<h1>수현이 짱</h1>";
+        for(let i=1; i<=10; i++){
+            lstr += lstr
+            idoc.body.innerHTML += lstr;
+        }
+        console.log("바뀐노피:",idoc.documentElement.scrollHeight);
+        cifr.height = idoc.documentElement.scrollHeight + 50;
+    }
+
+</script>    
+</body>
+</html>

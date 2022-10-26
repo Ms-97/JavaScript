@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<!-- 사이즈 조정은 부모 기준,  canvas에 직접 써 봐야 아무일도 안 일어남-->
+<input type="text" id="txt" value="10,20,30,40,50,60">
+<input type="button" value="누를깡?" id="btn">
+<div style="height:400px;width:400px">       
+    <canvas id="myChart"></canvas>
+</div>
+<script>
+ //서버에서 발행된 헤더네임과 토큰갑사 저장
+/* 
+var header = '${_csrf.headerName}';
+var token =  '${_csrf.token}';
+
+
+//바닐라 자바스크립트 사용시 AJAX send 전에 헤더값 세팅 필요
+xhr.setRequestHeader(header, token);
+*/
+
+/* jQuery Ajax 사용시 beforeSend 추가
+    dataType:"json",
+    beforeSend: function(xhr) {
+            xhr.setRequestHeader(header, token);
+    },
+    success:function(data){}
+
+*/
+
+
+    // 속성 접근법과 update만 잘 쓰면 , 차트의 신으로 불림
+
+    // bind 잘 안 써요
+
+    /* 기본적으로 함수를 아는 사람
+    var myPrint = function(p_arg){ 
+        document.write(p_arg)
+    }
+    */
+     
+    // reference(참조)를 잘 이해하고 있는 사람
+    // var myPrint = document.write; // 문법적으로 문제가 없음
+    
+    // reference(참조)를 잘 이해, this도 잘 이해, fp(함수포인터)도 잘 이해
+    // Good Concept(좋은 개념)을 가지고 있는 개발자
+    var myPrint = document.write.bind(document);
+    //write메소드 안의 this에 강제로 document객체를 할당 
+    myPrint("<h1>수현이짱</h1>");
+
+    //document.get? 요게 성능이 좋지만 일일이 구분하기가 귀찮아서
+    //아주 쪼메 성능 손해를 보더라도 querySelector, querySelectorAll을
+    // 쓰는 게 추세
+
+const ctxt = document.querySelector("#txt");
+const cbtn = document.querySelector("#btn");
+var v_data2 = {
+                type:'line',
+                label: '미정이 손 비빔 안 추운데 비빔밥',
+                data: [12, 19, 3, 5, 2, 3, 4, 8],
+                borderWidth: 1
+    };
+
+function f_ranArrData(){
+    var v_arrData = [];
+    for(var i=1; i<=8; i++){ // 8개 짜리 배열
+        v_arrData.push(Math.floor(Math.random()*40) + 60);
+    }
+    return v_arrData;
+}
+
+function f_reCycle(){
+    myChart.data.datasets[0].data = f_ranArrData();
+    myChart.data.datasets[1].data = f_ranArrData();
+    myChart.update();  // 다시 그리깅
+    setTimeout(f_reCycle,500);
+}
+    
+cbtn.onclick = ()=>{
+    myChart.data.labels = ["흥","치","뿡","메","롱","헉","학","컥"];
+   // myChart.data.datasets[0].data = ctxt.value.split(",");
+    myChart.data.datasets[1] = v_data2; 
+    f_reCycle();
+   // myChart.update(); // 다시 그리시옹, 요것만 잊지 마시옹!
+    //alert("체킁!")
+}
+
+
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar', // bar, line,radar,pie,doughnut
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [
+            {
+                label: '성겸이 미워',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+                borderWidth: 1
+            }
+        ]
+    },
+    //options 부근은 특별히 공부하디 말공 필요할 때 원하는 것만 구글검색해서 
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// 차트객체 접근법 -> 너무나 쉬움 -> 한번만 잘 알아두면 평생 써먹음
+//alert(myChart.data.datasets[0].data); 
+
+
+</script>
+</body>
+</html>

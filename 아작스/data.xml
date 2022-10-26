@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <friends>
-    <friend>
-        <name>박성우</name>
-        <age>30쯤</age>
-        <alias>목소리가보여</alias>
-    </friend>
-    <friend>
-        <name>박수현</name>
-        <age>20</age>
-        <alias>멋찐반장</alias>
-    </friend>
-    <friend>
-        <name>김유미</name>
-        <age>20</age>
-        <alias>멀리서도보여</alias>
-    </friend>
-    <friend>
-        <name>이상권</name>
-        <age>30</age>
-        <alias>상권을형성하자</alias>
-    </friend>
-</friends>   
+  <friend>
+     <name>박성우</name>
+     <age>30쯤</age>
+     <alias>목소리가보여</alias>
+  </friend>
+  <friend>
+     <name>박수현</name>
+     <age>20</age>
+     <alias>멋찐반장</alias>
+  </friend>
+  <friend>
+     <name>김유미</name>
+     <age>20</age>
+     <alias>멀리서도보영</alias>
+  </friend>
+  <friend>
+     <name>이상권</name>
+     <age>30</age>
+     <alias>상권을 형성하자</alias>
+  </friend>
+</friends>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AG-GRID</title>
+    <!--설치 -->
+    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
+</head>
+<body>
+    <!--그리드를 그릴 곳 지정-->
+    <div id="myGrid" class="ag-theme-alpine" style="height:500px"></div>
+<script>
+//컬럼 정의
+const columnDefs = [
+  {headerName:"수현", field: "make"},
+  {headerName:"유미", field: "model" },
+  {headerName:"상권", field: "price", editable:true }
+];
+
+//올림픽 메달 수상자 정보에 맞춘 컬럼 정의
+const columnDefs2 = [
+  { field: "athlete",checkboxSelection: true },
+  { field: "age" },
+  { field: "country"},
+  { field: "year" },
+  { field: "date" },
+  { field: "sport" },
+  { field: "gold" },
+  { field: "silver" },
+  { field: "bronze" },
+  { field: "total" }
+];
+
+// 데이타 정의
+const rowData = [
+  { make: "Toyota", model: "Celica", price: 35000 },
+  { make: "Ford", model: "Mondeo", price: 32000 },
+  { make: "Porsche", model: "Boxster", price: 72000 }
+];
+
+// 그리드 옵션 지정
+const gridOptions = {
+  columnDefs: columnDefs,
+  rowData: rowData,
+  defaultColDef: {  // 모든 컬럼에 공통으로 주는 옵션 설정
+    sortable:true,
+    filter:true,
+    resizable:true,
+  },
+  pagination:true,
+  paginationAutoPageSize:true,
+  paginationPageSize:8,
+};
+// 그리드 생성, 언제 DOMContentLoaded 이벤트가 발생했을 때
+// DOMContentLoaded(태그만 해석이 끝나면) vs load(태그,css, 이미지로딩까지 끝났을 때)
+document.addEventListener('DOMContentLoaded', () => {
+    const gridDiv = document.querySelector('#myGrid');
+    new agGrid.Grid(gridDiv, gridOptions);
+}); 
+
+// ag-grid 사이트에서 제공해 주는 올림픽 수상자 리스트 데이타 
+fetch("https://www.ag-grid.com/example-assets/olympic-winners.json")
+  .then(response => response.json())
+  .then(data => {  // ajax로 치면 success(data) 와 같음
+     // 컬럼 옵션 재정의
+     gridOptions.api.setColumnDefs(columnDefs2); 
+     // 가져온 데이타 grid에 로딩    
+     gridOptions.api.setRowData(data);
+  });
+</script>
+</body>
+</html>

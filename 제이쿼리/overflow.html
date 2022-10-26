@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #parent {
+        position: relative;
+        border: 2px solid black;
+        width:200px;
+        height:200px;
+        overflow: hidden;/* 안보이겡 */
+    }
+    #child {
+        position:absolute;
+        width: 820px;
+        height:200px;
+    }
+</style>
+</head>
+<body>
+    <div id="parent">
+        <div id="child">
+            <img src="../imgs/roze01.jpg" width="200" height="200">
+            <img src="../imgs/roze02.jpg" width="200" height="200">
+            <img src="../imgs/roze03.jpg" width="200" height="200">
+            <img src="../imgs/roze04.jpg" width="200" height="200">
+        </div>
+    </div> 
+<script>
+    const cchild = document.querySelector("#child");
+    var f_move = ()=>{
+        if(!cchild.style.left){
+            cchild.style.left = "0px"; //left값 없을 때 초기황 
+        }
+        //alert("ppp"+parseInt(cchild.style.left) + "ppp");
+        cchild.style.left = parseInt(cchild.style.left) - 10 + "px";
+        setTimeout(f_move,300); 
+    }
+
+    window.onload = ()=>{
+        f_move();
+    }
+</script>   
+</body>
+</html>

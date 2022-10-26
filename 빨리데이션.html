@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +8,52 @@
     <!-- validation을 서버사이드에서만 구현하는 사람들이 있는데
         기본적으로 클라이언트 사이드에서 구현해야 하고, 부족한 것만 서버사이드에 추가
     -->
+    <!-- 
+        아주 주의:
+        button 태그가 form 태그 사이에 들어가면, 자동으로 type=submit 이 됨
+        일반 버튼으로 사용하려면 type=button을 꼬옥 기술 해 주어야 함
+        상당히 자주 문제가 발생함
+    -->
     <form action="시작.html" onsubmit="return f_submit()">
-        아이디 <input type="text" name="nm_id" id="mid" value=""><br>
-        이메일 <input type="text" name="nm_email" id="memail" value=""><br>
-        암호 <input type="password" name="nm_pw" id="mpw" value=""><br>
+        아이디 <input type="text" name="nm_id" id="mid"  placeholder="영문자5~8개요망"   pattern="^[a-zA-Z]{5,8}$"   value="" required><br>
+        이메일 <input type="text" name="nm_email"  pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}" id="memail" value="" required><br>
+        암호 <input type="password" name="nm_pw" id="mpw" value="" required><br>
+        <button type="button">떤쏭</button><br>
         <input type="submit" value="떤쏭">
         <!-- submit버튼에 onclick 이벤트를 걸진 않아용 -->
     </form>
+
+    <!-- form 태그가 여러번 있어도 상관없지만 form안에 form이 있어서는 안됨-->
+    <form id="myForm" action="bind.html">
+        아이디 <input type="text" name="nm_id" id="yid" value="" required><br>
+        이메일 <input type="text" name="nm_email" id="yemail" value="" required><br>
+        암호 <input type="password" name="nm_pw" id="ypw" value="" required><br>
+        <div name="nm_div" value="KGB">메롱</div> <!--사용자 입력태그 아님-->
+        <button type="button" name="nm_btn">떤쏭</button><br>
+        <input type="submit" name="submit" value="떤쏭2">
+        <!-- submit버튼에 onclick 이벤트를 걸진 않아용 -->
+    </form>
+
 <script>
+    //jQuery $("form").serialize() 메소드
+    function f_serialize(p_form){
+        var v_elems = p_form.elements; // 사용자 입력태그들을 가리키는 elements;
+        var v_queryString = "";
+        for(var i=0; i<v_elems.length; i++){
+            v_queryString += v_elems[i].name + "=" + v_elems[i].value + "&";
+        }
+        return v_queryString;
+    }
+
+    var v_myForm = document.querySelector("#myForm");
+    v_myForm.onsubmit=function(){
+        event.preventDefault();  // form의 전송 기능 막기
+        alert(f_serialize(v_myForm));  // 항상 누느로 화긴
+        //요기소 보통 아작스를 많이 하지용
+    }
+
     var v_id = document.querySelector("#mid");
+    // 아래 처럼 작성하는 유효성 체크가 원래 자바스크립트가 세상에 나왔던 이유(지금은 완전 다름)
     function f_submit(){
         if(!v_id.value){
             alert("머라도 써 이놈아!");

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #nemo {
+        position: relative; /* 부모로 쓸 것*/
+        left: 200px;
+        width:300px;
+        height:300px;
+        /*border: 2px solid black;*/ /* 테두리 */
+        overflow: hidden;
+        transform: rotate(0deg); /* 45도 회전*/
+        transform-origin: center bottom;  /* 회전 중심 옮기깅 */
+    }
+    #circle1 {
+        position:absolute;
+        width:300px;
+        height:300px;
+        left:150px;
+        background-color: red;
+        border-radius: 50%;
+    }
+    #circle2 {
+        position:absolute;
+        width:300px;
+        height:300px;
+        top:150px;
+        background-color: red;
+        border-radius: 50%;
+    }
+    #point {
+        position:absolute;
+        width:10px;
+        height:10px;
+        left:290px;
+        top:290px;
+        /*background-color: black;*/
+    }
+</style>
+</head>
+<body>
+    <div id="nemo">
+        <div id="circle1"></div>
+        <div id="circle2"></div>
+        <div id="point"></div>
+    </div>
+    <input type="button" value="뽁사" onclick="f_copy()">
+<script>
+    const cnemo = document.querySelector("#nemo");
+
+    const f_copy = ()=>{
+        var copy1 = cnemo.cloneNode(true);  //매개변수 없음 얕은 복사
+        document.body.appendChild(copy1);
+    }
+
+    var v_gakdo = 0;
+    const f_rotate = ()=>{
+        v_gakdo =  (v_gakdo + 5) % 360; // 증감코드에 생각외의 위험요소가 있음
+        cnemo.style.transform = "rotate(" + v_gakdo + "deg)";
+        setTimeout(f_rotate,300);
+    }
+    f_rotate();
+</script>    
+</body>
+</html>

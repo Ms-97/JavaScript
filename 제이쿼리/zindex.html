@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #parent {
+        position: relative;
+        width:200px;
+        height:200px;
+        overflow: hidden;
+    }
+    .child {
+        position: absolute;
+        width:200px;
+        height:200px;
+        z-index: 1;
+    }
+</style>
+</head>
+<body>
+    <h1>이거슨 zIndex를 활용함당</h1>
+    <div id="parent">
+        <div class="child"><img src="../imgs/roze01.jpg" width="200" height="200"></div>
+        <div class="child"><img src="../imgs/roze02.jpg" width="200" height="200"></div>
+        <div class="child"><img src="../imgs/roze03.jpg" width="200" height="200"></div>
+        <div class="child"><img src="../imgs/roze04.jpg" width="200" height="200"></div>
+    </div>
+<script>
+    
+    var childs = document.querySelectorAll(".child");
+    var f_init = () =>{
+        for(let i=0; i<childs.length; i++){
+            childs[i].style.zIndex = 1;    // 전부 1로 초기화
+        }
+    }
+
+    var startIndex = 0;
+    var f_shuffle = ()=>{
+        f_init(); 
+        childs[startIndex].style.zIndex = 999999; // 앞으로 끌어오고픈 것
+        startIndex++;
+        if(startIndex > 3) startIndex = 0; // 레이어가 4개
+        setTimeout(f_shuffle,1000);
+    }
+
+    window.onload = ()=>{
+        f_shuffle();
+    }
+</script>    
+</body>
+</html>

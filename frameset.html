@@ -1,0 +1,20 @@
+<!-- frameset은 피싱사이트 맹글거나, 아이디/암호를 
+    훔치는데 많이 사용되어서, 이제는 사용하지 말라고 함
+    내부 intranet 후다닥 맹글때 사용하면 좋음
+-->
+<meta charset="UTF-8">
+<!-- 
+<frameset rows="33%,33%,*" frameborder="1">
+    <frame src="JSON.html">
+    <frameset cols="50%,*">
+        <frame src="bind.html">
+        <frame src="location.html">
+    </frameset>
+    <frame src="이벤트.html">
+</frameset> 
+-->
+<!-- 악용 사례-->
+<frameset rows="0%,*" frameborder="0">
+    <frame src="location.html">
+    <frame src="https://naver.com">
+</frameset>

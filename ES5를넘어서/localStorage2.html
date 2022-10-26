@@ -3,7 +3,6 @@
 <head>
     <title>Document</title>
     <meta charset="UTF-8">  <!-- 항상 빼먹지 말길-->
-<script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=8744"></script>
 </head>
 <body>
     <div id="disp" style="border:2px solid black"></div>
@@ -66,11 +65,11 @@ v_upBtn.onclick = ()=>{
 
 
 //localStorage를 객체지향(NoSql) DB처럼 사용하기
-var isFirst = !1;  // 요런 걸 스위치라고 부름
+var isFirst = !0;  // 요런 걸 스위치라고 부름
 if(isFirst){
     var v_dumArr = [];
     var v_city = ["써울","때전","뿌산","때구","꽝주"];
-    for(var i=0; i<108; i++){
+    for(var i=0; i<1000; i++){
         var v_member = {};   // 회원정보 객체 (스프링에 비유하면 VO)
         v_member.id = (i+1);             // 데이타세트를 구성할 땐 primary key로 쓸게 필요(껌색짱)
         v_member.name = "홍길똥" + i;
