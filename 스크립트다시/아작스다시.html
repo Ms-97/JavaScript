@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 아작스 원본 (DRY -> Do not Repeat Yourself)
+    /* 전역변수로는 쓰지 않음, 함수 안에서 지역변수로 사용
+    // SPA (Single Page Application)
+    var v_ajax = new XMLHttpRequest(); // 심부름꾼(통신객체) 생성
+    v_ajax.open("get","꼭알아야할것.html",true); // 할일 지정
+    //끝났는지 이벤트로 모니터링
+    v_ajax.onreadystatechange = ()=>{
+        if(v_ajax.readyState == 4 && v_ajax.status == 200){  // 끝났엉!
+               console.log(v_ajax.responseText)// 심부름꾼이 가져온 물건
+               //가져온 물건으로 할일 지정 
+        }
+    }
+    v_ajax.send();        // 하시옹
+    */
+   /*
+    var setting= {
+        method:"get",
+        url:"꼭알아야할것.html",
+        cb: (data)=>{
+            console.log(data);
+        }
+     }
+     */
+     var $={};  // 네임스페이스용
+     $.ajax =(setting)=>{  // 메소드
+        var v_ajax = new XMLHttpRequest(); 
+        v_ajax.open(setting.method,setting.url,true); 
+        v_ajax.onreadystatechange = ()=>{
+            if(v_ajax.readyState == 4 && v_ajax.status == 200){  
+               console.log(v_ajax.responseText)
+               // 가져온거 가지고 뭔가 해야 하는 코드가 와야함
+               if(setting.dataType == "json"){
+                  setting.success(JSON.parse(v_ajax.responseText));  
+               }else {
+                 setting.success(v_ajax.responseText)
+               }
+            }
+        }
+        v_ajax.send(); 
+     }
+
+     $.ajax({
+        method:"get",
+        url:"꼭알아야할것.html",
+        dataType:"text",
+        success:(data)=>{
+            console.log(data);
+        }
+     });
+
+</script>
