@@ -22,16 +22,17 @@ public class HeyrimMapperTest {
 	
 	@Test
 	public void testInsert() {
-		HeyrimVO namchin = new HeyrimVO();
-		namchin.setNamGrade("최상");
-		namchin.setNamName("곽동석");
-		namchin.setNamTel("010-8282-2424");
-		namchin.setNamId(1);
 		
-		log.debug(namchin.toString());
-		
-		assertEquals(1,heyrimMapper.insertNam(namchin));
-		
+		//더미 데이터 맹글깅
+		HeyrimVO namchin;	
+		for(int i=1; i<=15; i++) {
+			namchin = new HeyrimVO();
+			namchin.setNamGrade("등급" + i);
+			namchin.setNamName("홍길똥" + i);
+			namchin.setNamTel("010-8282-242" + i);
+			log.debug(namchin.toString());
+			assertEquals(1,heyrimMapper.insertNam(namchin));
+		}		
 	}
 
 }

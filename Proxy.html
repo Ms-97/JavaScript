@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    //Proxy(대리) 개념만 쪼메 이해해 봅시당
+    var yumi = (...args)=>{
+       // console.time("유미");
+        console.log(args)
+       // console.timeEnd("유미");
+    }
+
+    var suhyun = (...args)=>{
+        //console.time("수현");
+        console.log(args)
+        //console.timeEnd("수현");
+    }
+
+    var mijung = (...args)=>{
+        //console.time("미정");
+        console.log(args)
+        //console.timeEnd("미정");
+    }
+
+    //일 잘하는 대리인 아저씨를 만듬 -> 공짜
+    // 아주 유용하고, 로직구현이 애매할 때 생각하면 좋음, 
+    // 단점은 누네 보드시 약간의 성능 손해 -> 당연 직거래 아니고 간접거래니깡(쁘락지가 끼었음)
+    var proxy = (cb,...arg)=>{
+             console.time("러닝타임");
+             cb(arg);
+             console.timeEnd("러닝타임");
+    }
+
+    proxy(yumi, "s","m","o","k","i","n","g");
+    proxy(suhyun, "b","l","a","c","p","i","n","k");
+    proxy(mijung, "b","t","s"," ","m","a","n","s","e");
+
+    /*
+    console.time("미유");
+    yumi("s","m","o","k","i","n","g");
+    console.timeEnd("미유");
+
+    console.time("현수");
+    suhyun("s","m","o","k","i","n","g");
+    console.timeEnd("현수");
+
+    console.time("정미");
+    mijung("s","m","o","k","i","n","g");
+    console.timeEnd("정미");
+    */
+
+</script>

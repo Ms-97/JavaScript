@@ -1,0 +1,14 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" pageEncoding="UTF-8" %>
+<html>
+<head>
+	<title>Home</title>
+</head>
+<body>
+<h1>
+	안농 성우님 목소리 넘 좋아용
+</h1>
+
+<P>  The time on the server is ${serverTime}. </P>
+</body>
+</html>

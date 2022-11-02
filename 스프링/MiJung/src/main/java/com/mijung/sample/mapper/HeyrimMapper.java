@@ -1,11 +1,19 @@
 package com.mijung.sample.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mijung.sample.vo.HeyrimVO;
 
 @Mapper  // 명시적으로 붙여주는 것이 좋음, 없으면 약간 헷갈림
 public interface HeyrimMapper {
+	
+	//get List
+	public List<HeyrimVO> getList();
+	
+	//id로 남친 검색
+	public HeyrimVO getNam(String namId);
 	
 	//post로 왔을 때 실행, 생성
 	public int insertNam(HeyrimVO namchin);

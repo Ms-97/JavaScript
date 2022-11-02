@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>난 열린창</h1>
+<input type="button" value="누르숑" id="pressBtn"> 
+<script>
+    var v_url = location.href;
+    alert(decodeURIComponent(v_url)); // 누느로 화긴
+    var v_url2 = v_url.split("?")[1];  // 물음표 오른쪽
+    var v_name = v_url2.split("=")[1];
+    
+    alert("당신은 " + decodeURIComponent(v_name) + "님 이심당 맞디용?");
+
+    // 날 열어 준 창을 가리키는 키워드 opener(병따개)
+    pressBtn.onclick = ()=>{
+        opener.document.querySelector("#closeBtn").value="창창닫기";
+        opener.location.href="https://www.ddit.or.kr";
+    }
+</script>   
+</body>
+</html>

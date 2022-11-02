@@ -10,83 +10,85 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
-	<form action="" id="myForm" >
-		이름<input type="text" name="namName" value="곽금규"><br>
-		등급<input type="text" name="namGrade" value="경력자"><br>
-		전화<input type="text" name="namTel" value="010-2424-8282"><br>
-		등록<input type="submit"  value ="뜽록" id="btn">
-		수정<input type="button"  value ="수정" id="btnUp">
-		<!-- submit에는 onclick을 사용하지 않음! -->
-    </form>
+    <div id="disp" style="border:1px solid black"></div>
+
 <script>
+	var vdisp = document.querySelector("#disp");
+    //window.onload와 거의 같다고 생각해도 무방(실제는 조금 이벤트가 빨리 발생 DomContentLoaded)
+    
+    //리스트 출력하는 AJAX를 바끄로 꺼내
+    function dispList(){
+    	$.ajax({
+			type:"get",
+			url:"/sample/hyerim/list",
+			dataType:"json", 
+			beforeSend:(xhr)=>{ // 시큐리티 사용시 토근을 헤더에 담는데 사용
+				xhr.setRequestHeader(header, token);
+			},
+			success:(rslt)=>{
+				console.log("너머온값",rslt); // 요게 있어야 항상 디버깅이 편함
+				var vtblStr = "<table border>";
+				vtblStr += "<tr><th>ID</th><th>이름</th></tr>";
+			    //배열 데이터 반복
+				for(var i=0; i<rslt.length; i++){
+					vtblStr += "<tr>";
+					vtblStr += `<td>\${rslt[i].namId}</td>`;
+					vtblStr += `<td>\${rslt[i].namTel}</td>`;					
+					vtblStr += "</tr>";
+				}		
+			    vtblStr += "</table>";
+				vdisp.innerHTML = vtblStr;	
+				
+				//window.open으로 하깅스
+				$("tr").on("click",function(){
+					var namId = this.children[0].innerHTML;
+					window.open("${webPath}/hyerim/getNam?namId="+namId,"yumi","left=200,top=50,width=300,height=500")
+					
+				});
+				
+				/*시퀀스상 테이블 tr에 이벤트를 주려면 테이블이 만들어진 후에				
+				$("tr").on("click",function(){
+					//어떤 DOM 객체든 jQuery메소드를 쓰려면 $()로 묶어주면 끝
+					 //console.log($(this));
+					 //console.log(this.children[0].innerHTML);
+					 //console.log($(this).children().eq(0).html());
+					 var chinId = this.children[0].innerHTML;
+					 $.ajax({
+							type:"get",
+							url:"/sample/hyerim/" + chinId,
+							dataType:"json", // 보통 받아온 데이터에 JSON.parse를 할지 안할지 여부
+							beforeSend:(xhr)=>{ // 시큐리티 사용시 토근을 헤더에 담는데 사용
+								xhr.setRequestHeader(header, token);
+							},
+							success:(rslt)=>{
+								console.log(rslt); // 요게 있어야 항상 디버깅이 편함
+								$("input[name=namId]").val(rslt.namId);
+								$("input[name=namName]").val(rslt.namName);
+								$("input[name=namTel]").val(rslt.namTel);
+								$("input[name=namGrade]").val(rslt.namGrade);								
+							},
+							error:(request,status,error)=>{
+								alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							}
+						});
+				});
+				*/
+				
+			},
+			error:(request,status,error)=>{
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+    }
+    
+    $(function(){
+    	dispList();
+    })
+
+
 	var header = '${_csrf.headerName}';
     var token =  '${_csrf.token}';
 
-    $("#btnUp").on("click",()=>{
-		$.ajax({
-			type:"put",  // RESTFUL에서 일반적으로 PUT은 UPDATE 수정에 사용
-			url:"/sample/hyerim/update",
-			data:$("#myForm").serialize(),    // 넘길 데이타
-			dataType:"text", // 보통 받아온 데이터에 JSON.parse를 할지 안할지 여부
-			beforeSend:(xhr)=>{ // 시큐리티 사용시 토근을 헤더에 담는데 사용
-				xhr.setRequestHeader(header, token);
-			},
-			success:(rslt)=>{
-				console.log("너머온값",rslt); // 요게 있어야 항상 디버깅이 편함
-			},
-			error:(request,status,error)=>{
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-    });
-
-    
-    
-    $("#myForm").on("submit",()=>{
-		event.preventDefault();  // form 전송 안되겡
-
-		/*  인코딩메소드           디코딩메소드
-		   escape                 unescape          어쭈 옛날꺼
-		   encodeURI              decodeURI         몇년전 옛날꺼
-		   encodeURIComponent     decodeURIComponent 최근꺼
-		*/
-		alert(decodeURIComponent($("#myForm").serialize())); // 항상 궁금하면 찍어 봄
-		$.ajax({
-			type:"post",
-			url:"/sample/hyerim/insert",
-			data:$("#myForm").serialize(),    // 넘길 데이타
-			dataType:"text", // 보통 받아온 데이터에 JSON.parse를 할지 안할지 여부
-			beforeSend:(xhr)=>{ // 시큐리티 사용시 토근을 헤더에 담는데 사용
-				xhr.setRequestHeader(header, token);
-			},
-			success:(rslt)=>{
-				console.log("너머온값",rslt); // 요게 있어야 항상 디버깅이 편함
-			},
-			error:(request,status,error)=>{
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-    })
-    
-    
-     /* ajax는 이미 추상화를 해버린 jquery ajax를 쓰면 일관성이 있어서 편함    
-	const cForm = document.querySelector("#myForm");
-	cForm.addEventListener("submit",()=>{
-		event.preventDefault();  
-		var v_ajax = new XMLHttpRequest(); 
-        v_ajax.open("post","/sample/hyerim/insert",true);
-		//일반 post방식일 때 아래 줄이 필요
-		v_ajax.setRequestHeader("content-type","application/x-www-form-urlencoded")
-    	v_ajax.setRequestHeader(header, token);
-		
-		v_ajax.onreadystatechange = ()=>{
-        	if(v_ajax.readyState == 4 && v_ajax.status == 200){  
-               console.log(v_ajax.responseText)               
-        	}
-    	}
-    	v_ajax.send();
-	});
-	*/
 
 </script>
 </body>

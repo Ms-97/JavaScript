@@ -1,5 +1,7 @@
 package com.mijung.sample.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,16 @@ public class HeyrimServiceImpl implements HeyrimService {
 	@Override
 	public int deleteNam(HeyrimVO namchin) {
 		return heyrimMapper.deleteNam(namchin);
+	}
+
+	@Override
+	public List<HeyrimVO> getList() {
+		return heyrimMapper.getList();
+	}
+
+	@Override
+	public HeyrimVO getNam(String namId) {
+		return heyrimMapper.getNam(namId);
 	}
 
 }

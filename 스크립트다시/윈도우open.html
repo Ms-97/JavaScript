@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>새창열기(추세는 모달)</title>
+</head>
+<body>
+    <input type="button" value="새창열기" id="openBtn">
+    <input type="button" value="창닫기"   id="closeBtn">
+    <a href="https://naver.com" target="yumi">네이벙</a>
+<script>
+    closeBtn.onclick= ()=>{
+        if(newWin){
+            newWin.document.querySelector("#pressBtn").value="누르쑝쑝";
+        }
+        /*
+        if(newWin){
+            newWin.close();
+        }else {
+            alert("창 안 열었어요 환기하삼");
+        }
+        */
+    }
+    var newWin=null;
+    //id값을 그대로 써도 되지만, 이건 아주 짧은 소스로 설명할 때만
+    openBtn.addEventListener("click", function(){
+        newWin = window.open("열린창.html?myName=김유미","yumi","left=500,top=100, width=400,height=500");
+    })
+</script>
+</body>
+</html>
