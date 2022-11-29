@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #suhyun {
+        width:250px;
+        height:250px;
+        border:3px groove pink;
+    }
+</style>
+</head>
+<body>
+     <h1>모르면 수현이에게 묻는 걸롱</h1>
+    <div  id="suhyun" >
+         요기요 파일 끌어다 놓으세용
+   </div>
+    <div id="preview"></div>
+    <form action="" id="myForm" enctype="multipart/form-data">
+        <input type="file" name="file"  multiple id="myFile" value="">
+        <input type="submit" value="떤쏭">
+    </form>
+    <input type="button" value="화긴사살" onclick="f_check()">
+<script>
+     const cmyForm = document.querySelector("#myForm");
+     cmyForm.onsubmit = function(){
+        event.preventDefault();  // 폼 전송 막기, 왜?, 아작스로 보낼 거니깡
+        let formData = new FormData(cmyForm);
+        formData.append("file" , 파일객체1);  // 원하는 것만 추강
+        formData.append("file" , 파일객체2);
+        formData.append("file" , 파일객체3);
+
+        //아작스로 전송 , FormData로 보내면 무조건 multipart/form-data 형식으로 보내짐
+        // jquery 아작스는 application/x-www-form-urlencoded을 디폴트로 세팅하는데
+        //contentType:false,
+        //processData:false  를 하면 디폴트 세팅으로 바꾸지 않음
+        //cache:false
+
+
+     }
+
+
+
+    function f_check(){
+        console.log(cfile.files);   // 누느로 화긴!
+    }
+
+    const csuhyun = document.querySelector("#suhyun");
+    const cpreview = document.querySelector("#preview");
+    const cfile = document.querySelector("#myFile");
+
+    //드래그 오버
+    csuhyun.ondragover = function(){
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    //드롭
+    csuhyun.ondrop = function(){
+        event.preventDefault();
+        event.stopPropagation();
+
+        console.log(event.dataTransfer.files);
+        let files = event.dataTransfer.files;
+        
+        /* 안됨
+        let  myList = Array.from(files);
+        myList.splice(2,1);  // 1개 빼봄
+        */
+
+        // 1개씩은 못쓰는 뎅, 통짜로 덮어쓸 수는 있음, 단 event.dataTransfer.files 인 경우에 한해서
+        cfile.files = files;  // 요건 가능!!!!! 뚱뚱요
+        //cfile.files = myList; // 될깡?
+        
+        /* 요건 안타깝지만 fileList 안의 값을 바꾸는 건 안됨 (읽기전용, 에러도 없음~~ ㅠㅠ)
+        for(var i=0; i<files.length; i++){
+            cfile.files[i] = files[i];
+        }
+        */
+       csuhyun.innerHTML = ""; // 일단 클리엉
+       csuhyun.innerHTML = "썬택하신 파일들은 아래와 같슴당<br>";
+        for(let i =0; i<files.length; i++ ){
+            csuhyun.innerHTML += "<h4>"+ files[i].name + "</h4>";
+        }
+    
+        /*
+        for(let i=0; i<files.length; i++){
+            fileRead(files[i],csuhyun);
+        }
+        */
+
+    }
+
+    // 다른 영역도 막아야 함 (금규의 치사함)
+    window.addEventListener("dragover",()=>{
+        event.preventDefault();
+    });
+
+    window.addEventListener("drop",()=>{
+        event.preventDefault();
+    });
+
+
+
+    //만약 쪼메 IE11등 쪼메 약간 이전 브라우져를 지원하려면 
+    function fileRead(p_file,p_target){
+        var fileReader = new FileReader(); // 파일 읽어주는 아저씨 생성
+        fileReader.readAsDataURL(p_file);
+        fileReader.onload = function(){
+            //console.log(fileReader.result); // 읽은 내용이 result 속성에 담겨있음
+            var  yumi = document.createElement("img"); // 이미지 태그 생성
+            yumi.width = 100;
+            yumi.height = 100;
+            yumi.src = fileReader.result;  // src에 이미지 읽은 내용 전달
+            p_target.appendChild(yumi); // 화면에 보이겡
+        }
+    }
+
+    cfile.onchange = function(){
+        console.log(cfile.files);    // 제일 중요한 속성 files, 오직 사용자가 선택해준 파일만 읽을 수 있음
+        // 아작스에 심부름꾼이 필요한 것처럼, 파일 읽어주는 목소리 좋은 알아 아저씨 필요
+      //  let oneFile = cfile.files[0];
+
+      for(var i=0; i< cfile.files.length; i++){  // 기본적으로 let으로 해야 정상 동작, 변수 범위의 문제
+            fileRead(cfile.files[i],cpreview); // 파일 익는 부분을 1개씩 별도 처링  
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+[
+    {"title": "금규", "key": "1","checkbox":true},
+    {"title": "1조", "key": "2", "folder": true,"checkbox":true, 
+      "children": [
+            {"title": "동석", "key": "3","checkbox":true, "folder":true,
+                 "children": [
+                    {"title": "희진", "key": "7","checkbox":true},
+                    {"title": "수빈", "key": "8","checkbox":true},
+                    {"title": "재열", "key": "9","checkbox":true},
+                    {"title": "성겸", "key": "10","checkbox":true},
+                    {"title": "지영", "key": "11","checkbox":true}
+                ]
+            },
+            {"title": "정현", "key": "4","checkbox":true},
+            {"title": "재린", "key": "5","checkbox":true},
+            {"title": "민석", "key": "6","checkbox":true}
+        ]
+    }
+]

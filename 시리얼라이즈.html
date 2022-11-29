@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form  id="sim" action="">
+        <div>안녕</div>
+        <input type="text" name="aaa" value="심"><br>
+        <input type="text" name="bbb" value="재"><br>
+        <input type="text" name="ccc" value="린"><br>
+        <input type="text" name="ddd" value="흥"><br>
+    </form>
+<script>
+      function mySerialize(){    // jQuery의  $(폼).serialize의 실체
+          const cSim = document.querySelector("#sim");
+          let lElems = cSim.elements;  // form 태그 안의 사용자 입력  태그(element)만 가져옴
+          var queryString = "";
+          for(let i=0; i<lElems.length; i++){
+               queryString += lElems[i].name + "=" + lElems[i].value + "&";
+          }
+          return queryString; 
+      }
+
+      alert(mySerialize());
+
+
+</script>
+</body>
+</html>

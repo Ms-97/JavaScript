@@ -94,6 +94,39 @@ class MyComp {
     }
 }
 
+class MyDropDown {
+    init(params) {
+        this.eGui = document.createElement('div');
+        this.eGui.innerHTML = `
+            <select id="sid" style="width:100%;height:100%">
+                 <option value="pgy">건영</option>
+                 <option value="kmj">미정</option>
+                 <option value="lhr">혜림</option>
+                 <option value="hth">태훈</option>
+            </select>
+        `;
+        console.log(document.querySelector('#sid'));
+        this.mySel = this.eGui.querySelector('#sid')
+        this.mySel.onchange = () => {
+              alert(this.mySel.value);
+        }
+    }
+
+    getGui(){
+        console.log("check1");
+        return this.eGui;
+    }
+
+    refresh(){
+        console.log("check2");
+        return false;
+    }
+
+    destroy(){
+        console.log("check3");
+    }
+}
+
 //컬럼 정의
 const columnDefs = [
   {headerName:"수현", field: "make"},
@@ -109,7 +142,7 @@ const columnDefs2 = [
   { field: "year" },
   { field: "date", cellRenderer: MyComp},
   { field: "sport" },
-  { field: "gold" },
+  { field: "gold", cellRenderer:MyDropDown },
   { field: "silver" },
   { field: "bronze" },
   { field: "total" }

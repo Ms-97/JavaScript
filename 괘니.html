@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>핸들바 괘니 맹글어 보깅</h1>
+    <div id="disp"></div>
+<script  type="template" id="merong"> 
+     <table border="1" style="font-size:2em">
+        <tr>
+            <td>${list[0].name}</td>
+            <td>${list[0].alias}</td>
+        </tr>
+        <tr>
+            <td>${list[1].name}</td>
+            <td>${list[1].alias}</td>
+        </tr>
+        <tr>
+            <td>${list[2].name}</td>
+            <td>${list[2].alias}</td>
+        </tr>
+    </table>
+</script>
+<script>
+    //핸들바 기본원리만 구현해 보깅
+  var  JiyounHandle = {}  // 네임 스페이스용 빈 객체
+  JiyounHandle.compile=function(p_str, list){
+    console.log(p_str,list);
+    return eval("`" + p_str + "`");  // 스크립트 엔진 구동이  꼭 필용?
+  }
+
+ var template = document.querySelector("#merong").text;
+ 
+  var v_data = [
+    {name:"지영",alias:"9시10분뿐"},
+    {name:"수빈",alias:"오후출근끈"},
+    {name:"민혁",alias:"늦게찌문찍고행사싸"},
+  ];
+ 
+  var htmlTemplate = JiyounHandle.compile(template, v_data);
+  console.log(htmlTemplate);
+  disp.innerHTML = htmlTemplate;
+
+
+
+
+</script>
+
+</body>
+</html>

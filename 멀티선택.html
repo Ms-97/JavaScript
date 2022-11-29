@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>멀티 선택</title>
+<style>
+    #multi {
+        border:2px solid black;
+        width:320px;
+        height:300px;
+    }
+    #left {
+        display: inline-block;
+        border:2px solid pink;
+        width:150px;
+        height:100%;
+        vertical-align: top;
+    }
+    #right {
+        display: inline-block;
+        border:2px solid pink;
+        width:150px;
+        height:100%;
+        vertical-align: top;
+    }
+
+</style>
+</head>
+<body>
+<div id="multi">
+    <div id="left">
+        <select  id="sleft"  size="4">
+        </select>
+    </div>
+    <div id="right">
+        <select  id="sright" size="4">
+        </select>        
+    </div>
+</div> 
+<input type="text"  id="myText" value=""><input type="button" value="추강"  onclick="f_add()">
+<script>
+const cMyText = document.querySelector("#myText");
+const cSLeft = document.querySelector("#sleft");
+const cSRight = document.querySelector("#sright");
+
+function f_add(){
+      let optValue = cMyText.value;
+      let opt = document.createElement("option");
+      opt.value = optValue;
+      opt.innerHTML = optValue;
+      opt.style.border="1px solid blue";
+      cSLeft.appendChild(opt);
+      opt.addEventListener("click",function(){
+           let par = event.currentTarget.parentElement;
+           if(par.id == "sleft"){
+             par.size = par.options.length + 3;
+             cSRight.appendChild(event.currentTarget);
+              return;
+           }
+
+           if(par.id == "sright"){
+            par.size = par.options.length + 3;
+            cSLeft.appendChild(event.currentTarget);
+            return;
+            }
+     })
+}
+</script>   
+</body>
+</html>
